@@ -44,6 +44,23 @@ static int s_retry_num = 0;
 static const char *TAG = "WIFI";
 
 //HTTP message
+const char* display_msg = "HTTP/1.1 200 OK\r\n"
+                    "Server: ESP32 Controlled Machine\r\n"
+                    "Content-Type: text/html\r\n"
+                    "Content-Length: 250\r\n"
+                    "Connection: Closed\r\n"
+                    "\r\n"
+                    "<!DOCTYPE html>\r\n"
+                    "<html>\r\n"
+                    "<head>\r\n"
+                    "<title>My Web Page</title>\r\n"
+                    "</head>\r\n"
+                    "<body>\r\n"
+                    "<h1>Welcome to ESP32!</h1>\r\n"
+                    "<button type = 'button'>TURN ON</button>\r\n"
+                    "</body>\r\n"
+                    "</html>\r\n";
+
 const char* on_msg = "HTTP/1.1 200 OK\r\n"
                     "Server: ESP32 Controlled Machine\r\n"
                     "Content-Type: text/html\r\n"
@@ -260,16 +277,25 @@ esp_err_t connect_tcp_server(void)
         {
             printf("message: %s\n",buffer);
             r = -1;
-            if(strstr(buffer, "TURN_ON_LED"))
+
+            if(strstr(buffer, "ESP32-GPIO"))
             {
-                write(client_socket, on_msg, strlen(on_msg));
+                write(client_socket, display_msg, strlen(display_msg));
                 gpio_set_level(BLINK_LED, 1);
             }
-            else
-            {
-                write(client_socket, off_msg, strlen(off_msg));
-                gpio_set_level(BLINK_LED, 0);
-            }
+
+            // if(strstr(buffer, "TURN_ON_LED"))
+            // {
+            //     write(client_socket, on_msg, strlen(on_msg));
+            //     gpio_set_level(BLINK_LED, 1);
+            // }
+            // else
+            // {
+            //     write(client_socket, off_msg, strlen(off_msg));
+            //     gpio_set_level(BLINK_LED, 0);
+            // }
+
+
         }
         // Close the connection
         close(client_socket);
