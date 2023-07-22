@@ -15,13 +15,13 @@
 #include "lwip/netdb.h"
 #include "lwip/dns.h"
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
+#include "config.h"
 /** DEFINES **/
 #define WIFI_SUCCESS 1 << 0
 #define WIFI_FAILURE 1 << 1
@@ -178,8 +178,8 @@ esp_err_t connect_wifi()
     /** START THE WIFI DRIVER **/
     wifi_config_t wifi_config = {
         .sta = {
-            .ssid = "41 linden dr",
-            .password = "123linden456",
+            .ssid = WIFI_SSID,
+            .password = WIFI_PASSWORD,
 	     .threshold.authmode = WIFI_AUTH_WPA2_PSK,
             .pmf_cfg = {
                 .capable = true,
