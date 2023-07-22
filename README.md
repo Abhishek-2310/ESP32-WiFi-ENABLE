@@ -38,7 +38,7 @@ By following the instructions and code examples in this repository, you'll be ab
     <ol>
         <li>Clone or download this GitHub repository to your local development machine.</li>
         <pre><code>git clone https://github.com/Abhishek-2310/ESP32-WiFi-ENABLE.git</code></pre>
-        <li>Connect your ESP32 development board to your computer using the USB cable.</li>
+        <li>Connect your ESP32 development board to your computer using the Micro-USB cable.</li>
         <li>Open the project folder in your preferred IDE for ESP-IDF.</li>
         <li>Configure the project's WiFi settings in the <code>main/config.h</code> file. Update the SSID and password to
             match your WiFi network credentials.</li>
