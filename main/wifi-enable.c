@@ -44,22 +44,23 @@ static int s_retry_num = 0;
 static const char *TAG = "WIFI";
 
 //HTTP message
-const char* display_msg = "HTTP/1.1 200 OK\r\n"
-                    "Server: ESP32 Controlled Machine\r\n"
-                    "Content-Type: text/html\r\n"
-                    "Content-Length: 250\r\n"
-                    "Connection: Closed\r\n"
-                    "\r\n"
-                    "<!DOCTYPE html>\r\n"
-                    "<html>\r\n"
-                    "<head>\r\n"
-                    "<title>My Web Page</title>\r\n"
-                    "</head>\r\n"
-                    "<body>\r\n"
-                    "<h1>Welcome to ESP32!</h1>\r\n"
-                    "<button type = 'button'>TURN ON</button>\r\n"
-                    "</body>\r\n"
-                    "</html>\r\n";
+// const char* display_msg = "HTTP/1.1 200 OK\r\n"
+//                     "Server: ESP32 Controlled Machine\r\n"
+//                     "Content-Type: text/html\r\n"
+//                     "Content-Length: 250\r\n"
+//                     "Connection: Closed\r\n"
+//                     "\r\n"
+//                     "<!DOCTYPE html>\r\n"
+//                     "<html>\r\n"
+//                     "<head>\r\n"
+//                     "<title>My ESP32</title>\r\n"
+//                     "</head>\r\n"
+//                     "<body>\r\n"
+//                     "<h1>Welcome to ESP32!</h1>\r\n"
+//                     "<a href='/TURN_ON_LED'>TURN ON!</a>\r\n"
+//                     "<a href='/TURN_OFF_LED'>TURN OFF!</a>\r\n"
+//                     "</body>\r\n"
+//                     "</html>\r\n";
 
 const char* on_msg = "HTTP/1.1 200 OK\r\n"
                     "Server: ESP32 Controlled Machine\r\n"
@@ -70,30 +71,37 @@ const char* on_msg = "HTTP/1.1 200 OK\r\n"
                     "<!DOCTYPE html>\r\n"
                     "<html>\r\n"
                     "<head>\r\n"
-                    "<title>My Web Page</title>\r\n"
+                    "<title>My ESP32</title>\r\n"
                     "</head>\r\n"
                     "<body>\r\n"
                     "<h1>Welcome to ESP32!</h1>\r\n"
+                    "<h1>GPIO Turned ON!</h1>\r\n"
                     "<img src = 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Check_Green.png'>\r\n"
+                    "<a href='/TURN_OFF_LED'>TURN OFF!</a>\r\n"
                     "</body>\r\n"
                     "</html>\r\n";
 
 const char* off_msg = "HTTP/1.1 200 OK\r\n"
                     "Server: ESP32 Controlled Machine\r\n"
                     "Content-Type: text/html\r\n"
-                    "Content-Length: 250\r\n"
+                    "Content-Length: 290\r\n"
                     "Connection: Closed\r\n"
                     "\r\n"
                     "<!DOCTYPE html>\r\n"
                     "<html>\r\n"
                     "<head>\r\n"
-                    "<title>My Web Page</title>\r\n"
+                    "<title>My ESP32</title>\r\n"
                     "</head>\r\n"
                     "<body>\r\n"
                     "<h1>Welcome to ESP32!</h1>\r\n"
-                    "<img src = 'https://upload.wikimedia.org/wikipedia/commons/8/83/Eo_circle_red_white_letter-x.svg'>\r\n"
+                    "<h1>GPIO Turned OFF!</h1>\r\n"
+                    "<img src = 'https://upload.wikimedia.org/wikipedia/commons/8/83/Eo_circle_red_white_letter-x.svg' width='76' height='72'>\r\n"
+                    "<a href='/TURN_ON_LED'>TURN ON!</a>\r\n"
                     "</body>\r\n"
                     "</html>\r\n";
+
+// Flags
+uint8_t rFlag = 0;
 
 /** FUNCTIONS **/
 
@@ -272,29 +280,23 @@ esp_err_t connect_tcp_server(void)
 
         // bzero(buffer, sizeof(buffer));
         int r = -1;
+
         r = read(client_socket, buffer, sizeof(buffer)-1);
         if(r > 0) 
         {
             printf("message: %s\n",buffer);
             r = -1;
 
-            if(strstr(buffer, "ESP32-GPIO"))
+            if(strstr(buffer, "TURN_ON_LED"))
             {
-                write(client_socket, display_msg, strlen(display_msg));
+                write(client_socket, on_msg, strlen(on_msg));
                 gpio_set_level(BLINK_LED, 1);
             }
-
-            // if(strstr(buffer, "TURN_ON_LED"))
-            // {
-            //     write(client_socket, on_msg, strlen(on_msg));
-            //     gpio_set_level(BLINK_LED, 1);
-            // }
-            // else
-            // {
-            //     write(client_socket, off_msg, strlen(off_msg));
-            //     gpio_set_level(BLINK_LED, 0);
-            // }
-
+            else
+            {
+                write(client_socket, off_msg, strlen(off_msg));
+                gpio_set_level(BLINK_LED, 0);
+            }
 
         }
         // Close the connection
