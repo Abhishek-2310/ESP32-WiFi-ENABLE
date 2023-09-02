@@ -63,7 +63,8 @@ ESP PROG to target JTAG connections:
 <li>Blue (TDO)   -> GPIO 15</li>
 <li>Green (TDI)  -> GPIO 12</li>
 </ul>
-Make to source the ESP32 source file made.
+    
+Make sure to source the ESP32 source file made.
 
 Run the openOCD command in one terminal:
 ```sh
