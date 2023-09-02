@@ -54,8 +54,8 @@ By following the instructions in this repository, you can quickly integrate WiFi
 <h2>Debugging</h2>
 ESP PROG to target JTAG connections:
 <ul>
-<li>3v3          -> 3v3
-<li>GND          -> GND
+<li>3v3          -> 3v3</li>
+<li>GND          -> GND</li>
 <li>Orange (TMS) -> GPIO 14</li>
 <li>Yellow (TCK) -> GPIO 13</li>
 <li>Blue (TDO)   -> GPIO 15</li>
