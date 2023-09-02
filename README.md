@@ -50,7 +50,31 @@ By following the instructions and code examples in this repository, you'll be ab
         <li>Once connected to the WiFi network, explore the example code in the <code>main</code> folder to learn how to
             send and receive data over WiFi.</li>
     </ol>
+    
+<h2>Getting Started</h2>
+ESP PROG to target JTAG connections:
 
+3v3          -> 3v3
+GND          -> GND
+Orange (TMS) -> GPIO 14
+Yellow (TCK) -> GPIO 13
+Blue (TDO)   -> GPIO 15
+Green (TDI)  -> GPIO 12
+
+Make to source the ESP32 source file made.
+
+Run the openOCD command in one terminal:
+```sh
+openocd -f board/esp32-wrover-kit-3.3v.cfg     # Both target and interface are included in board
+```
+upload the code to target via JTAG:
+```sh
+openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/blink-led.bin 0x10000 verify exit reset"
+```
+Run the GDB command for xtensa core:
+```sh
+xtensa-esp32-elf-gdb -x gdbinit build/blink-led.elf
+```
 <h2>Contributing</h2>
 <p>Contributions to this project are welcome! If you find any issues or want to add new features, please submit a pull request. For major changes, please open an issue first to discuss the proposed changes.</p>
 

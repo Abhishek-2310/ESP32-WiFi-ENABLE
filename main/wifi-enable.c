@@ -29,7 +29,7 @@
 #define TCP_FAILURE 1 << 1
 #define MAX_FAILURES 10
 #define PORT 80
-#define IP_ADDRESS "10.0.0.119"
+#define IP_ADDRESS "10.0.0.130"
 #define BUFFER_SIZE 1024
 #define BLINK_LED 2
 
