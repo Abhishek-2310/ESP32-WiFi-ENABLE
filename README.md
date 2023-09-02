@@ -6,7 +6,7 @@
 This project provides a comprehensive guide on how to enable WiFi connectivity for any project using the ESP32 microcontroller and the esp-idf (Espressif IoT Development Framework). The ESP32 is a powerful and versatile microcontroller that supports WiFi and Bluetooth connectivity, making it an excellent choice for Internet of Things (IoT) projects, home automation, sensor monitoring, and more.
 </p>
 <p>
-By following the instructions and code examples in this repository, you'll be able to quickly integrate WiFi capabilities into your projects, allowing them to communicate with other devices, cloud services, and the internet.
+By following the instructions in this repository, you can quickly integrate WiFi capabilities into your projects, allowing them to communicate with other devices, cloud services, and the internet.
 </p>
 
 <h2>Features</h2>
