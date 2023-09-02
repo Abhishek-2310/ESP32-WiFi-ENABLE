@@ -53,7 +53,7 @@ By following the instructions in this repository, you can quickly integrate WiFi
     
 <h2>Debugging</h2>
 <p align="center">
-<img src = "https://github.com/Abhishek-2310/ESP32-WiFi-ENABLE/blob/master/JTAG_connection_ESP32.jpg" width = "500" height = "300"></p>
+<img src = "https://github.com/Abhishek-2310/ESP32-WiFi-ENABLE/blob/master/JTAG_connection_ESP32.png" width = "750" height = "450"></p>
 ESP PROG to target JTAG connections:
 <ul>
 <li>3v3          -> 3v3</li>
